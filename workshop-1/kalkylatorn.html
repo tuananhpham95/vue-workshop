@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Enkel Räntekalkylator</title>
+    <!-- Hämta Vue från CDN -->
+    <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Enkel Räntekalkylator</h1>
+
+      <!-- Input-fält för huvudbelopp, räntesats och tid -->
+      <div>
+        <label for="principal">Huvudbelopp:</label>
+        <input type="number" id="principal" v-model="principal" />
+
+        <label for="rate">Räntesats (%):</label>
+        <input type="number" id="rate" v-model="rate" />
+
+        <label for="time">Tid (år):</label>
+        <input type="number" id="time" v-model="time" />
+      </div>
+
+      <!-- Visa den beräknade enkla räntan -->
+      <div>
+        <p>Enkel Ränta: {{ calculatedInterest }} kr</p>
+      </div>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            principal: 0,
+            rate: 0,
+            time: 0,
+          };
+        },
+        computed: {
+          calculatedInterest() {
+            return (this.principal * this.rate * this.time) / 100;
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

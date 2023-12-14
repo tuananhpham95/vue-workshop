@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Vue Todo List</title>
+    <!-- Hämta Vue från CDN -->
+    <script src="https://unpkg.com/vue@3.0.0/dist/vue.global.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Todo List</h1>
+
+      <!-- Input och knapp för att lägga till en ny todo -->
+      <div>
+        <input type="text" v-model="newTodo" placeholder="Skriv en ny todo" />
+        <button @click="addTodo">Lägg till</button>
+      </div>
+
+      <!-- Lista över todos -->
+      <ul>
+        <li v-for="(todo, index) in todos" :key="index">
+          {{ todo }}
+          <button @click="removeTodo(index)">Remove</button>
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            todos: [],
+            newTodo: "",
+          };
+        },
+        methods: {
+          addTodo() {
+            if (this.newTodo.trim() !== "") {
+              this.todos.push(this.newTodo);
+              this.newTodo = ""; // Cleara input efter att en todo har lagts till
+            }
+          },
+          removeTodo(index) {
+            this.todos.splice(index, 1);
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
